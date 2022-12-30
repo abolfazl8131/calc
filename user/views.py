@@ -14,19 +14,6 @@ class UserAPIView(CreateAPIView):
 
         data = request.data
 
-        _mutable = data._mutable
-
-        # set to mutable
-        data._mutable = True
-
-        # сhange the values you want
-        
-        data['username'] = data['phone_number']
-        
-        # set mutable flag back
-        data._mutable = _mutable
-
-
         serializer = self.serializer_class(data = data)
 
         
