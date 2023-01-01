@@ -13,3 +13,7 @@ class ProductPayment(models.Model):
 
     def __str__(self):
         return f'{self.buyer} bought {self.product_name} for {self.for_who} and the price is {self.price}'
+
+    def done(self):
+        self.is_done = True
+        self.save()

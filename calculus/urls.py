@@ -1,9 +1,10 @@
 
 from django.urls import path
-from .views import PaymentAPIView,MyCalcView,MyCalcReport
+from .views import PaymentAPIView,MyCalcView,MyCalcReport,ClearingPayment
 
 urlpatterns = [
     path('new/' , PaymentAPIView.as_view()),
     path('all/' ,MyCalcView.as_view()),
-    path('report/' , MyCalcReport.as_view())
+    path('report/' , MyCalcReport.as_view()),
+    path('clear/',ClearingPayment.as_view())
 ]

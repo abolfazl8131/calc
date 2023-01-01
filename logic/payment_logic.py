@@ -8,8 +8,6 @@ def payment_report(user , qs , get_queryset):
         
         reports = []
 
-        qs_for_sub = []
-
         buyers = []
 
         for_whos = []
@@ -36,7 +34,7 @@ def payment_report(user , qs , get_queryset):
             for j in range(len(for_whos)+1):
                 try:
                    
-                    for p in ProductPayment.objects.filter(buyer = i , for_who = j).values('price'):
+                    for p in ProductPayment.objects.filter(buyer = i , for_who = j , is_done=False).values('price'):
 
                         matrix[i-1][j-1] += p['price']
                         
