@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import ProductPayment
 from user.models import User
 from user.serializers import UserSerializer
+
 class ProductPaymentSerializer(serializers.ModelSerializer):
     buyer = serializers.SlugRelatedField(queryset = User.objects.all() , slug_field='username')
     class Meta:

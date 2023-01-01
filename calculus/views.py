@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .serializers import ProductPaymentSerializer , ProductPaymentGetSerializer
 from rest_framework.generics import CreateAPIView,RetrieveAPIView, ListAPIView
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from .models import ProductPayment
 from rest_framework.permissions import IsAuthenticated
 
@@ -56,3 +56,22 @@ class MyCalcView(RetrieveAPIView):
         return JsonResponse(serializer.data , safe=False)
 
 
+from logic.payment_logic import payment_report
+class MyCalcReport(RetrieveAPIView):
+
+
+    def get_queryset(self,buyer):
+
+        qs1 = ProductPayment.objects.filter(buyer = buyer ,is_done=False) 
+        qs2 = ProductPayment.objects.filter(for_who = buyer,is_done=False)
+        return (qs1 | qs2).distinct()
+
+    def get(self, request):
+
+        user = request.user
+
+        qs = self.get_queryset(user)
+        
+        reports = payment_report(user,qs,self.get_queryset)
+
+        return JsonResponse({"reports":reports})
