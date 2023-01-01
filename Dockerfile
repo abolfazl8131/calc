@@ -5,9 +5,9 @@ FROM python:3.9.6
 RUN pip install --no-cache-dir numpy scipy pandas matplotlib django-resized sklearn
 
 # set work directory
-RUN mkdir /code
-COPY ./code /code
-WORKDIR /code 
+RUN mkdir /calc
+COPY ./calc /calc
+WORKDIR /calc 
 # set environment variables
 
 ENV PYTHONDONTWRITEBYTECODE=1
